@@ -1,5 +1,10 @@
 # Robust Scheduler
 
+![Tests](https://github.com/ckalandk/scheduler/actions/workflows/tests.yml/badge.svg)
+![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue)
+![Linter: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+
 A bare-metal, thread-safe, and zero-dependency concurrent task scheduling engine for Python.
 
 `scheduler` allows you to schedule tasks to execute in the future, handle recurring tasks, and process them concurrently using a custom-built, highly optimized thread pool—all without the overhead of heavy third-party libraries.
