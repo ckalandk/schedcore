@@ -1,7 +1,7 @@
 # Robust Scheduler
 
 ![Tests](https://github.com/ckalandk/scheduler/actions/workflows/tests.yml/badge.svg)
-![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue)
+![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.13t%20%7C%203.14%20%7C%203.14t-blue)
 ![Linter: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
