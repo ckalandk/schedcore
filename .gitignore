@@ -8,3 +8,12 @@ wheels/
 
 # Virtual environments
 .venv
+
+# Sphinx documentation build directory
+docs/build/
+docs/_build/
+
+# IDEs and OS files
+.vscode/
+.idea/
+.DS_Store
