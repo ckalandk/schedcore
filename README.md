@@ -1,0 +1,98 @@
+# Robust Scheduler
+
+A bare-metal, thread-safe, and zero-dependency concurrent task scheduling engine for Python.
+
+`scheduler` allows you to schedule tasks to execute in the future, handle recurring tasks, and process them concurrently using a custom-built, highly optimized thread pool—all without the overhead of heavy third-party libraries.
+
+## 🚀 Features
+
+* **Zero Dependencies:** Built entirely using Python's standard library (`threading`, `queue`, `time`).
+* **Custom Execution Engine:** Uses a custom ThreadPool designed for absolute bare-metal performance.
+* **Thread-Safe Architecture:** Protected by condition variables and thread-safe queues to prevent race conditions and spurious wakeups.
+* **Graceful Shutdown:** Implements the "Poison Pill" pattern to ensure all background OS threads terminate cleanly without leaking memory.
+* **Modern Python:** Fully type-hinted and compatible with Python 3.10+.
+
+## 🛠️ Installation
+
+This project uses [uv](https://github.com/astral-sh/uv), you can easily set it up for local development.
+
+1. Clone the repository:
+
+   ```bash
+   git clone [https://github.com/ckalandk/scheduler.git](https://github.com/ckalandk/scheduler.git)
+   cd scheduler
+   ```
+
+2. Install the package in editable mode using uv:
+
+```bash
+    uv sync
+```
+
+## 📖 Quick Start
+
+The following example, demonstrate how to start a scheduler, submit tasks and
+gracefully shut it down
+
+```python
+import time
+from scheduler import Scheduler, Task
+
+# 1. Define your tasks
+def greet(name: str):
+    print(f"[{time.strftime('%X')}] Hello, {name}!")
+
+def recurring_ping():
+    print(f"[{time.strftime('%X')}] Ping...")
+
+# 2. Initialize the Scheduler (automatically sizes the ThreadPool based on CPU cores)
+scheduler = Scheduler(workers=4)
+scheduler.start()
+
+print(f"[{time.strftime('%X')}] Scheduler started.")
+
+# 3. Schedule tasks
+# Runs once, 2 seconds from now
+task_one = Task(timeout=2, repeat=False, func=greet, name="Alice")
+scheduler.schedule(task_one)
+
+# Runs repeatedly, every 1.5 seconds
+task_two = Task(timeout=1.5, repeat=True, func=recurring_ping)
+scheduler.schedule(task_two)
+
+# 4. Keep the main thread alive to watch the background threads work
+try:
+    time.sleep(6)
+except KeyboardInterrupt:
+    pass
+finally:
+    # 5. Cleanly shut down all background threads
+    print("Shutting down gracefully...")
+    scheduler.request_stop()
+```
+
+## 🧠 Architecture Overview
+
+This library is split into three core components:
+
+1. `Task`: A lightweight container that holds the target function,
+(stored internally in a `functools.partial`), and its timing requirements (`timeout`, `repeat`).
+
+2. `ThreadPool`: A custom-built worker pool utilizing `queue.Queue`.
+It bypasses the heavy machinery of `concurrent.futures.ThreadPoolExecutor`
+for fire-and-forget tasks, ensuring maximum throughput.
+
+3. `Scheduler`: The orchestrator. It uses a `queue.PriorityQueue` and a `threading.Condition`
+to precisely calculate time deltas and hand off tasks to the `ThreadPool` at the exact right microsecond.
+
+## 🧪 Running Tests
+
+To run the test suite:
+
+```bash
+uv run pytest -v
+```
+
+## 📄 License
+
+MIT License. See LICENSE for more information.
