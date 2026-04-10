@@ -79,7 +79,7 @@ class Scheduler:
     def start(self):
         self.__thread.start()
 
-    def request_stop(self):
+    def request_stop(self, wait=True):
         """
         Signals the dispatcher and the thread pool to shut down gracefully.
 
@@ -89,4 +89,4 @@ class Scheduler:
         with self.__cv:
             self.__stop_requested = True
             self.__cv.notify()
-        self.__executor.shutdown(wait=True)
+        self.__executor.shutdown(wait=wait)
