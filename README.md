@@ -5,9 +5,9 @@
 ![Linter: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-A lightway, thread-safe, and zero-dependency concurrent task scheduling engine for Python.
+A lightweight, thread-safe, and zero-dependency concurrent task scheduling engine for Python.
 
-`scheduler` allows you to schedule tasks to execute in the future, handle recurring tasks, and process them concurrently using a custom-built, lightway thread pool—all without the overhead of heavy third-party libraries.
+`scheduler` allows you to schedule tasks to execute in the future, handle recurring tasks, and process them concurrently using a custom-built, lightweight thread pool—all without the overhead of heavy third-party libraries.
 
 ## 🚀 Features
 

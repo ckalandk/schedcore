@@ -1,7 +1,7 @@
 import time
 import threading
 import pytest
-from scheduler import Scheduler, Task
+from schedcore import Scheduler, Task
 
 
 @pytest.fixture

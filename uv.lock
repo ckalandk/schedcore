@@ -225,7 +225,7 @@ wheels = [
 ]
 
 [[package]]
-name = "scheduler"
+name = "schedcore"
 version = "0.1.0"
 source = { editable = "." }
 

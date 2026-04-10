@@ -1,6 +1,6 @@
 import threading
 
-from scheduler import ThreadPool, Task
+from schedcore import ThreadPool, Task
 
 
 def test_thread_pool_throughput():

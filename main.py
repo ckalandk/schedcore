@@ -1,5 +1,5 @@
 import time
-from scheduler import Scheduler, Task
+from schedcore import Scheduler, Task
 
 
 # 1. Define your tasks
