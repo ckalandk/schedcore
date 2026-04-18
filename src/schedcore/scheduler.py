@@ -43,7 +43,7 @@ class Scheduler:
             task (Task): The Task instance to be scheduled.
         """
         with self.__cv:
-            deadline = time.monotonic() + task.timeout
+            deadline = time.monotonic() + task.interval
             task_id = next(self.__counter)
             self.__queue.put((deadline, task_id, task))
             self.__cv.notify()

@@ -25,7 +25,7 @@ def test_single_delayed_task(scheduler):
     event = threading.Event()
 
     # Schedule a task for 50 milliseconds from now
-    scheduler.schedule(Task(timeout=0.05, repeat=False, func=event.set))
+    scheduler.schedule(Task(interval=0.05, repeat=False, func=event.set))
 
     # wait() blocks the test until the worker thread calls event.set().
     # The 1.0s timeout ensures the test fails instantly instead of hanging forever if broken.
@@ -48,11 +48,13 @@ def test_task_priority_and_ordering(scheduler):
             event.set()
 
     # Task A is scheduled first, but is due in 200ms
-    scheduler.schedule(Task(timeout=0.2, repeat=False, func=append_and_check, name="A"))
+    scheduler.schedule(
+        Task(interval=0.2, repeat=False, func=append_and_check, name="A")
+    )
 
     # Task B is scheduled second, but is due in 50ms
     scheduler.schedule(
-        Task(timeout=0.05, repeat=False, func=append_and_check, name="B")
+        Task(interval=0.05, repeat=False, func=append_and_check, name="B")
     )
 
     event.wait(timeout=1.0)
@@ -72,7 +74,7 @@ def test_repeating_task(scheduler):
         results.append(time.monotonic())
 
     # Schedule a task to repeat every 50ms
-    scheduler.schedule(Task(timeout=0.05, repeat=True, func=counter_func))
+    scheduler.schedule(Task(interval=0.05, repeat=True, func=counter_func))
 
     start_time = time.monotonic()
     while len(results) < 3 and time.monotonic() - start_time < 1.0:
@@ -92,7 +94,7 @@ def test_graceful_shutdown():
 
     # Schedule a task 10 minutes in the future.
     # If our stop logic is broken, the dispatcher thread will sleep for 10 minutes.
-    s.schedule(Task(timeout=600, repeat=False, func=lambda: None))
+    s.schedule(Task(interval=600, repeat=False, func=lambda: None))
 
     # Request stop immediately
     s.request_stop()

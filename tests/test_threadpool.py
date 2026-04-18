@@ -11,7 +11,7 @@ def test_thread_pool_throughput():
         results.append(n * n)
 
     for i in range(10):
-        task = Task(timeout=0, repeat=False, func=work, n=i)
+        task = Task(interval=0, repeat=False, func=work, n=i)
         pool.submit(task)
 
     pool.shutdown(wait=True)
@@ -29,7 +29,7 @@ def test_thread_pool_exception_resilience():
         results.append(n * n)
 
     for i in range(10):
-        task = Task(timeout=0, repeat=False, func=work, n=i)
+        task = Task(interval=0, repeat=False, func=work, n=i)
         pool.submit(task)
 
     pool.shutdown(wait=True)
@@ -52,7 +52,7 @@ def test_thread_pool_exception_handling():
     def work():
         raise ValueError("Task failed intentionally")
 
-    pool.submit(Task(timeout=0, repeat=False, func=work))
+    pool.submit(Task(interval=0, repeat=False, func=work))
 
     success = handler_event.wait(timeout=5)
 
@@ -72,7 +72,7 @@ def test_thread_pool_shutdown():
         results.append(n * n)
 
     for i in range(5):
-        task = Task(timeout=0, repeat=False, func=work, n=i)
+        task = Task(interval=0, repeat=False, func=work, n=i)
         pool.submit(task)
 
     pool.shutdown(wait=True)
