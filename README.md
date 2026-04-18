@@ -67,11 +67,11 @@ print(f"[{time.strftime('%X')}] Scheduler started.")
 
 # 3. Schedule tasks
 # Runs once, 2 seconds from now
-task_one = Task(timeout=2, repeat=False, func=greet, name="Alice")
+task_one = Task(interval=2, repeat=False, func=greet, name="Alice")
 scheduler.schedule(task_one)
 
 # Runs repeatedly, every 1.5 seconds
-task_two = Task(timeout=1.5, repeat=True, func=recurring_ping)
+task_two = Task(interval=1.5, repeat=True, func=recurring_ping)
 scheduler.schedule(task_two)
 
 # 4. Keep the main thread alive to watch the background threads work
