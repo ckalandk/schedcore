@@ -93,3 +93,6 @@ class Scheduler:
             self.__stop_requested = True
             self.__cv.notify()
         self.__executor.shutdown(wait=wait)
+        if wait:
+            if self.__thread is not threading.current_thread():
+                self.__thread.join()
