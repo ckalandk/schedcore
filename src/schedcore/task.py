@@ -52,4 +52,4 @@ class Task:
             if hasattr(self.__func, "func")
             else str(self.__func)
         )
-        return f"Task(timeout={self.__interval}, repeat={self.__repeat}, func='{func_name}')"
+        return f"Task(interval={self.__interval}, repeat={self.__repeat}, func='{func_name}')"
